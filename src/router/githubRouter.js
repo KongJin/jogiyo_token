@@ -1,7 +1,8 @@
 import express from "express";
+import { postGitToken } from "../controllers/githubController";
 
 const githubRotuer = express.Router();
 
-// githubRotuer.get("/", getGithubToken);
+githubRotuer.post("/", postGitToken);
 
 export default githubRotuer;
