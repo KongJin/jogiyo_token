@@ -1,8 +1,8 @@
 import express from "express";
-import { postToken } from "../controllers/kakaoController";
+import { postKakaoToken } from "../controllers/kakaoController";
 
 const kakaoRotuer = express.Router();
 
-kakaoRotuer.post("/", postToken);
+kakaoRotuer.post("/", postKakaoToken);
 
 export default kakaoRotuer;

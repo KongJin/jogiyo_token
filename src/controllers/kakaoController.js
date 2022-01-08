@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const postToken = async (req, res) => {
+export const postKakaoToken = async (req, res) => {
   const { code } = req.body;
   if (!code) {
     return res.json({ message: "not have code" });
@@ -8,7 +8,7 @@ export const postToken = async (req, res) => {
     const {
       data: { access_token },
     } = await axios.post(
-      `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=b72151a6abcb9e45c5b06010dc2a3f52&redirect_uri=http://localhost:4000&code=${code}`
+      `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.KAKAO_CLIENT_ID}&redirect_uri=http://localhost:3000&code=${code}`
     );
     const {
       data: {
