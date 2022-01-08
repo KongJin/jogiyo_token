@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const postGitToken = async (req, res) => {
   const { code } = req.body;
-  console.log("2");
+  console.log("3");
   const {
     data: { access_token },
   } = await axios.post(
