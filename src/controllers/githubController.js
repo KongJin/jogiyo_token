@@ -1,8 +1,9 @@
 import axios from "axios";
+import jwt from "jsonwebtoken";
 
 export const postGitToken = async (req, res) => {
   const { code } = req.body;
-  console.log("3");
+
   const {
     data: { access_token },
   } = await axios.post(
