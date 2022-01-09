@@ -1,8 +1,9 @@
 import axios from "axios";
+import jwt from "jsonwebtoken";
 
 export const postGitToken = async (req, res) => {
   const { code } = req.body;
-  console.log("3");
+
   const {
     data: { access_token },
   } = await axios.post(
@@ -20,5 +21,12 @@ export const postGitToken = async (req, res) => {
     headers: { authorization: `token ${access_token}` },
   });
 
-  return res.json({ id, login });
+  const payload = {
+    id,
+    nickname: login,
+    visitTime: Date.now(),
+    auth: "github",
+  };
+  const token = jwt.sign(payload, process.env.JWT_ACCESS, { expiresIn: "6h" });
+  return res.json({ token });
 };
