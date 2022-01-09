@@ -1,7 +1,8 @@
 import axios from "axios";
 import jwt from "jsonwebtoken";
+import User from "../../models/User";
 
-export const postKakaoToken = async (req, res) => {
+export const kakaoLogin = async (req, res) => {
   const { code } = req.body;
 
   if (!code) {
@@ -15,11 +16,7 @@ export const postKakaoToken = async (req, res) => {
       );
       const {
         data: {
-          id,
-          kakao_account: {
-            profile: { nickname },
-            email,
-          },
+          kakao_account: { email },
         },
       } = await axios.get("https://kapi.kakao.com/v2/user/me", {
         headers: {
@@ -27,14 +24,22 @@ export const postKakaoToken = async (req, res) => {
           "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
         },
       });
-      const payload = {
-        id,
-        nickname,
-        visitTime: Date.now(),
-        auth: "kakao",
-      };
 
-      const token = jwt.sign(payload, process.env.JWT_ACCESS, { expiresIn: "6h" });
+      if (!email) {
+        return res.json({ message: "Not Authorized" });
+      }
+      const user = await User.findOne({
+        email,
+      });
+
+      if (!user) {
+        await User.create({
+          email,
+        });
+      }
+
+      console.log(user);
+      const token = jwt.sign({ email }, process.env.JWT_ACCESS, { expiresIn: "6h" });
 
       return res.json({ token });
     } catch {
