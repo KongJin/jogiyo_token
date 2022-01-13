@@ -2,6 +2,7 @@
 import User from "../models/User";
 export const userInfo = async (req, res) => {
   const { nickname, birth, gender, mbti, location, contents } = req.body;
+  console.log(res.locals);
   const {
     user: { email },
   } = res.locals;

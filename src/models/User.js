@@ -2,9 +2,6 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    _id: {
-      type: Number,
-    },
     email: { type: String },
     nickname: { type: String },
     birth: { type: Number },
@@ -14,7 +11,7 @@ const userSchema = new mongoose.Schema(
     contents: { type: String },
     like: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
-  { _id: false, versionKey: false }
+  { versionKey: false }
 );
 
 const User = mongoose.model("User", userSchema);
