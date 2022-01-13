@@ -4,7 +4,8 @@ import User from "../../models/User";
 
 export const kakaoLogin = async (req, res) => {
   const { code } = req.body;
-
+  res.locals.code = code;
+  console.log(res.locals);
   if (!code) {
     return res.json({ message: "Not Authorized" });
   } else {
