@@ -9,11 +9,18 @@ const app = express();
 const logger = morgan("dev");
 app.use(cookieParser());
 app.use(express.json());
+
 app.use(
   cors({
     origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "OPTIONS"],
     credentials: true,
+    cookie: {
+      maxAge: 24 * 6 * 60 * 10000,
+      httpOnly: false,
+      secure: false,
+      sameSite: false,
+    },
   })
 );
 app.use(logger);
