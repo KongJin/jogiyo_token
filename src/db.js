@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import autoIncrement from "mongoose-auto-increment";
 
 mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
@@ -7,8 +6,6 @@ mongoose.connect(process.env.DB_URL, {
 });
 
 const db = mongoose.connection;
-
-autoIncrement.initialize(db);
 
 const handleOpen = () => console.log("✅ Connected to DB");
 
