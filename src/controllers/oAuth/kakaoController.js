@@ -4,8 +4,7 @@ import User from "../../models/User";
 
 export const kakaoLogin = async (req, res) => {
   const { code } = req.body;
-  res.locals.code = code;
-  console.log(res.locals);
+
   if (!code) {
     return res.json({ message: "Not Authorized" });
   } else {
@@ -42,9 +41,9 @@ export const kakaoLogin = async (req, res) => {
       const token = jwt.sign({ email }, process.env.JWT_ACCESS, {
         expiresIn: "6h",
       });
-
-      res.cookie("jwt", token);
       console.log(token);
+      // res.cookie("jwt", token);
+      res.locals.token = token;
       res.json({ message: "ok" });
     } catch {
       return res.json({ message: "Not Authorized" });
