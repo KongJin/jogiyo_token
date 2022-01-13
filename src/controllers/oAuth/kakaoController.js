@@ -43,7 +43,7 @@ export const kakaoLogin = async (req, res) => {
         expiresIn: "6h",
       });
 
-      res.cookie("jwt", token, { httpOnly: true });
+      res.cookie("jwt", token, {});
       res.json({ message: "ok" });
     } catch {
       return res.json({ message: "Not Authorized" });
