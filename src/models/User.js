@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema(
     mbti: { type: String },
     location: { type: String },
     contents: { type: String },
-    like: [{ type: mongoose.Schema.Types.ObjectId,ref="User" }],
+    like: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
   { _id: false, versionKey: false }
 );
