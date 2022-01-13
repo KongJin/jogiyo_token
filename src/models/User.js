@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema(
     mbti: { type: String },
     location: { type: String },
     contents: { type: String },
-    like: [{ type: mongoose.Schema.Types.ObjectId,ref="User" }],
+    iLike: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    likeMe: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
   { _id: false, versionKey: false }
 );

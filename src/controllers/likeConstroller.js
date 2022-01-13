@@ -1,24 +1,33 @@
 import User from "../../models/User";
-import jwt from "jsonwebtoken";
+import { verify } from "../JWT/verify";
 
 export const kok = async (req, res) => {
-  const token = req.cookies.jwt;
-  const { like } = req.body;
+  const { someoneID } = req.body;
   try {
-    const email = jwt.verify(token, process.env.JWT_ACCESS);
+    const email = verify(req);
 
-    const user = await User.findOne(email);
-    user.like.push(like);
+    const user = await User.findOne({ email }); //내정보
+
+    user.iLike.push(someoneID); //내정보에 내가 좋아하는 사람에 누군가를 추가
     user.save();
+
+    const someone = await User.findOne({ _id: someoneID });
+
+    someone.likeMe.push(someone._id);
+    someone.save();
+    res.json({ message: "ok" });
   } catch {
-    res.json({ message: false });
+    res.json({ message: "false" });
   }
 };
 
-export const whoILike = async (req, res) => {
-  return;
-};
+export const LikeList = async (req, res) => {
+  const email = verify(req);
 
-export const whoLikeMe = async (req, res) => {
-  return;
+  try {
+    const user = await User.findOne({ email }).populate("likeMe", "iLike"); //내정보
+    res.json({ message: "ok", likeMe: user.likeMe, iLike: user.iLike });
+  } catch {
+    res.json({ message: "false" });
+  }
 };

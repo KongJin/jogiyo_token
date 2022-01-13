@@ -10,5 +10,6 @@ app.use(express.json());
 app.use(cors());
 app.use(logger);
 app.use("/oauth", oAuthRotuer);
+app.use("/like");
 
 export default app;
