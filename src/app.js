@@ -17,9 +17,9 @@ app.use(
     credentials: true,
     cookie: {
       maxAge: 24 * 6 * 60 * 10000,
-      httpOnly: true,
+      httpOnly: false,
       secure: true,
-      sameSite: "none",
+      sameSite: "None",
     },
   })
 );

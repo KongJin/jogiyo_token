@@ -44,6 +44,7 @@ export const kakaoLogin = async (req, res) => {
       });
 
       res.cookie("jwt", token);
+      console.log(token);
       res.json({ message: "ok" });
     } catch {
       return res.json({ message: "Not Authorized" });
