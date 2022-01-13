@@ -41,5 +41,5 @@ export const githubLogin = async (req, res) => {
 
   const token = jwt.sign({ email }, process.env.JWT_ACCESS, { expiresIn: "6h" });
 
-  return res.json({ token });
+  return res.cookie("jwt", token).json({ message: "ok" });
 };

@@ -38,12 +38,18 @@ export const kakaoLogin = async (req, res) => {
         });
       }
 
+<<<<<<< HEAD
       console.log(user);
       const token = jwt.sign({ email }, process.env.JWT_ACCESS, {
         expiresIn: "6h",
       });
 
       return res.cookie("jwt", token).json({ token });
+=======
+      const token = jwt.sign({ email }, process.env.JWT_ACCESS, { expiresIn: "6h" });
+
+      return res.cookie("jwt", token).json({ message: "ok" });
+>>>>>>> origin/controller/JK
     } catch {
       return res.json({ message: "Not Authorized" });
     }
